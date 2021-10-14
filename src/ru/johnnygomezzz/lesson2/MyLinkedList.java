@@ -8,12 +8,14 @@ public class MyLinkedList<E> implements LinkedList<E>{
 
     @Override
     public void add(E val) {
-        if (isEmpty()) {
-            firstElement = new Node<>(null, val, null);
-            lastElement = firstElement;
-            size++;
+        Node<E> last = lastElement;
+        Node<E> newNode = new Node<>(last, val, null);
+        lastElement = newNode;
+        if (last == null) {
+            firstElement = newNode;
+        } else {
+            last.nextNode = newNode;
         }
-        lastElement = new Node<>(lastElement.nextNode, val, null);
         size++;
     }
 
@@ -32,14 +34,34 @@ public class MyLinkedList<E> implements LinkedList<E>{
     }
 
     @Override
+    public E getLastElement() {
+        if (lastElement != null) {
+            return lastElement.item;
+        }
+        return null;
+    }
+
+    @Override
     public E removeFirstElement() {
         if (isEmpty()) {
             return null;
         }
-
         Node<E> removedNode = firstElement;
         firstElement = removedNode.nextNode;
         removedNode.nextNode = null;
+
+        size--;
+        return removedNode.item;
+    }
+
+    @Override
+    public E removeLastElement() {
+        if (isEmpty()) {
+            return null;
+        }
+        Node<E> removedNode = lastElement;
+        lastElement = removedNode.prevNode;
+        //removedNode.nextNode = null;
 
         size--;
         return removedNode.item;

@@ -6,6 +6,8 @@ public class Lesson2Test {
         linkedList.add(3);
         linkedList.add(8);
         linkedList.add(6);
+        linkedList.add(567);
+        linkedList.add(89);
         linkedList.insertFirstElement(33);
         linkedList.insertFirstElement(44);
         linkedList.insertFirstElement(55);
@@ -13,5 +15,12 @@ public class Lesson2Test {
         linkedList.display();
         System.out.println(linkedList.size());
         System.out.println(linkedList.contains(8));
+
+        linkedList.removeFirstElement();
+        System.out.println(linkedList.getFirstElement());
+        System.out.println(linkedList.getLastElement());
+
+        linkedList.removeLastElement();
+        linkedList.display();
     }
 }

@@ -8,7 +8,11 @@ public interface LinkedList<E> {
 
     E getFirstElement();
 
+    E getLastElement();
+
     E removeFirstElement();
+
+    E removeLastElement();
 
     boolean remove(E val);
 
