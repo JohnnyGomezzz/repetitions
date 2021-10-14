@@ -7,7 +7,7 @@ public class MyLinkedList<E> implements LinkedList<E>{
     public int size;
 
     @Override
-    public void add(E val) {
+    public void add(E val) { // он же insertLastElement ^_^
         Node<E> last = lastElement;
         Node<E> newNode = new Node<>(last, val, null);
         lastElement = newNode;
@@ -56,8 +56,12 @@ public class MyLinkedList<E> implements LinkedList<E>{
 
     @Override
     public E removeLastElement() {
+        if (isEmpty()) {
+            return null;
+        }
         E element = lastElement.item;
         Node<E> prev = lastElement.prevNode;
+
         lastElement.item = null;
         lastElement.prevNode = null;
         lastElement = prev;
@@ -74,7 +78,24 @@ public class MyLinkedList<E> implements LinkedList<E>{
 
     @Override
     public boolean remove(E val) {
-        return false;
+        Node<E> current = firstElement;
+        Node<E> prev = null;
+        while (current != null) {
+            if (current.item.equals(val)) {
+                break;
+            }
+            prev = current;
+            current = current.nextNode;
+        }
+        if (current == null) {
+            return false;
+        } else if (current == firstElement) {
+            removeFirstElement();
+            return true;
+        } else {
+            prev.nextNode = current.nextNode;
+        }
+        return true;
     }
 
     @Override
