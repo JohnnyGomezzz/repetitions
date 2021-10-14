@@ -56,15 +56,20 @@ public class MyLinkedList<E> implements LinkedList<E>{
 
     @Override
     public E removeLastElement() {
-        if (isEmpty()) {
-            return null;
-        }
-        Node<E> removedNode = lastElement;
-        lastElement = removedNode.prevNode;
-        //removedNode.nextNode = null;
+        E element = lastElement.item;
+        Node<E> prev = lastElement.prevNode;
+        lastElement.item = null;
+        lastElement.prevNode = null;
+        lastElement = prev;
 
+        if (prev == null) {
+            firstElement = null;
+        } else {
+            prev.nextNode = null;
+        }
         size--;
-        return removedNode.item;
+
+        return element;
     }
 
     @Override
