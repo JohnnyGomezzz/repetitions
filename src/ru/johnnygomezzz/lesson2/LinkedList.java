@@ -17,5 +17,17 @@ public interface LinkedList<E> {
 
     boolean isEmpty();
 
+    boolean contains(E val);
+
     int size();
+
+    class Node<E> {
+        E item;
+        Node<E> nextNode;
+
+        public Node(E item, Node<E> nextNode) {
+            this.item = item;
+            this.nextNode = nextNode;
+        }
+    }
 }
