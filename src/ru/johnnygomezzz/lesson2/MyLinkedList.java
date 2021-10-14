@@ -3,26 +3,31 @@ package ru.johnnygomezzz.lesson2;
 public class MyLinkedList<E> implements LinkedList<E>{
 
     public Node<E> firstElement;
+    public Node<E> lastElement;
     public int size;
 
     @Override
-    public void insertFirstElement(E val) {
-        firstElement = new Node<>(val, firstElement);
+    public void add(E val) {
+        if (isEmpty()) {
+            firstElement = new Node<>(null, val, null);
+            lastElement = firstElement;
+            size++;
+        }
+        lastElement = new Node<>(lastElement.nextNode, val, null);
         size++;
     }
 
     @Override
-    public void insertLastElement(E val) {
-
+    public void insertFirstElement(E val) {
+        firstElement = new Node<>(null, val, firstElement);
+        size++;
     }
 
     @Override
     public E getFirstElement() {
-        return null;
-    }
-
-    @Override
-    public E getLastElement() {
+        if (firstElement != null) {
+            return firstElement.item;
+        }
         return null;
     }
 
@@ -41,18 +46,13 @@ public class MyLinkedList<E> implements LinkedList<E>{
     }
 
     @Override
-    public E removeLastElement() {
-        return null;
-    }
-
-    @Override
     public boolean remove(E val) {
         return false;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
@@ -69,6 +69,26 @@ public class MyLinkedList<E> implements LinkedList<E>{
 
     @Override
     public int size() {
-        return 0;
+        return size;
+    }
+
+    @Override
+    public void display() {
+        System.out.println(this);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        Node<E> currentNode = firstElement;
+        while (currentNode != null) {
+            sb.append(currentNode.item);
+            if (currentNode.nextNode != null) {
+                sb.append(", ");
+            }
+            currentNode = currentNode.nextNode;
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }

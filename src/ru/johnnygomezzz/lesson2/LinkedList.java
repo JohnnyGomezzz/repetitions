@@ -1,17 +1,14 @@
 package ru.johnnygomezzz.lesson2;
 
 public interface LinkedList<E> {
-    void insertFirstElement(E val);
 
-    void insertLastElement(E val);
+    void add(E val);
+
+    void insertFirstElement(E val);
 
     E getFirstElement();
 
-    E getLastElement();
-
     E removeFirstElement();
-
-    E removeLastElement();
 
     boolean remove(E val);
 
@@ -24,10 +21,14 @@ public interface LinkedList<E> {
     class Node<E> {
         E item;
         Node<E> nextNode;
+        Node<E> prevNode;
 
-        public Node(E item, Node<E> nextNode) {
+        public Node(Node<E> prevNode, E item, Node<E> nextNode) {
+            this.prevNode = prevNode;
             this.item = item;
             this.nextNode = nextNode;
         }
     }
+
+    void display();
 }
